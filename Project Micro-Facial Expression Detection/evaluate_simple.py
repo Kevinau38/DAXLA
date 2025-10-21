@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import pickle
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
@@ -92,14 +91,24 @@ def evaluate_model():
     # Create confusion matrix
     cm = confusion_matrix(y_test, y_pred)
     
-    # Plot confusion matrix
+    # Plot confusion matrix using matplotlib only
     plt.figure(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
-                xticklabels=['Truth', 'Lie'], 
-                yticklabels=['Truth', 'Lie'])
+    plt.imshow(cm, interpolation='nearest', cmap='Blues')
     plt.title('Confusion Matrix - Micro-Facial Expression Detection')
-    plt.xlabel('Predicted')
+    plt.colorbar()
+    
+    # Add text annotations
+    thresh = cm.max() / 2.
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            plt.text(j, i, format(cm[i, j], 'd'),
+                    horizontalalignment="center",
+                    color="white" if cm[i, j] > thresh else "black")
+    
     plt.ylabel('Actual')
+    plt.xlabel('Predicted')
+    plt.xticks([0, 1], ['Truth', 'Lie'])
+    plt.yticks([0, 1], ['Truth', 'Lie'])
     plt.tight_layout()
     
     # Create images directory if not exists
