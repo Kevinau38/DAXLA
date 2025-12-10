@@ -18,21 +18,16 @@ pip install -r requirements.txt
 ```
 
 2. **Chuẩn bị dữ liệu**
-```bash
-python simple_train.py  # Tạo cấu trúc thư mục
-```
-
-3. **Sắp xếp dữ liệu huấn luyện**
+- Tạo cấu trúc thư mục `data/micro/train/truth/` và `data/micro/train/lie/`
 - Copy ảnh vào `data/micro/train/truth/` (happy, neutral, surprise)
 - Copy ảnh vào `data/micro/train/lie/` (angry, sad, fear, disgust)
 
-4. **Huấn luyện mô hình**
-```python
-# Chạy script training
+3. **Huấn luyện mô hình**
+```bash
 python simple_train.py
 ```
 
-5. **Chạy ứng dụng**
+4. **Chạy ứng dụng**
 ```bash
 python trained_app.py
 ```
